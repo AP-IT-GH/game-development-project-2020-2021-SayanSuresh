@@ -62,7 +62,9 @@ namespace game2020
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+
             hero.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

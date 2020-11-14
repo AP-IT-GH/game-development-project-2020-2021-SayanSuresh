@@ -1,4 +1,5 @@
 ﻿using game2020.Animation;
+using game2020.Animation.HeroAnimations;
 using game2020.Commands;
 using game2020.Interfaces;
 using Microsoft.Xna.Framework;
@@ -9,31 +10,27 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Hero : IGameObject, ITransform
+    public class Hero : ITransform
     {
         public Vector2 Position { get ; set; }
         public Rectangle CollisinRectangle { get; set; }
 
-
         Texture2D heroTexture;
-        AnimationManager animation;
-        private Vector2 speed;
-        private Vector2 acceleration;
 
         private IInputReader reader;
         private IGameCommand moveCommand;
+        IEntityAnimation walkRight, walkLeft, walkDown, walkUp, currentAnimation;
 
         public Hero(Texture2D texture, IInputReader inputReader)
         {
             this.heroTexture = texture;
+            walkRight = new WalkRightAnimation(texture, this);
+            walkLeft = new WalkLeftAnimation(texture, this);
+            walkDown = new WalkDownAnimation(texture, this);
+            walkUp = new WalkUpAnimation(texture, this);
+            currentAnimation = walkRight;
 
-            animation = new AnimationManager();
-            animation.AddFrame(new AnimationFrame(new Rectangle(0, 70, 48, 62)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(48, 70, 48, 62)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(96, 70, 48, 62)));
-            
-
-            //Read input for my hero class
+            //Read input for hero class
             this.reader = inputReader;
 
             moveCommand = new MoveCommand();
@@ -41,71 +38,31 @@ namespace game2020.Players
 
         private void move(Vector2 _direction)
         {
-            moveCommand.Execute(this, _direction);
+            if (_direction.X == -1)
+                currentAnimation = walkLeft;
+            else if (_direction.X == 1)
+                currentAnimation = walkRight;
+            else if (_direction.Y == -1)
+                currentAnimation = walkUp;
+            else if (_direction.Y == 1)
+                currentAnimation = walkDown;
 
-            //if (position.X > 600 || position.X < 0)
-            //{
-            //    speed.X *= -1;
-            //    acceleration.X *= -1;
-            //}
-            //if (position.Y > 400 || position.Y < 0)
-            //{
-            //    speed.Y *= -1;
-            //    acceleration.Y *= -1;
-            //}
+            moveCommand.Execute(this, _direction);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture, Position, animation.currentFrame.SourceRectangle, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+            currentAnimation.Draw(spriteBatch);
         }
 
         public void Update(GameTime gameTime)
         {
-            // Only animation during movement
             var direction = reader.ReadInput();
 
-            // Walk Left aniamation
-            if (direction.X < 0 && direction.Y == 0)
+            if (direction.X != 0 || direction.Y != 0)
             {
-                animation.RemoveFrames();
-                animation.AddFrame(new AnimationFrame(new Rectangle(0, 197, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(48, 197, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(96, 197, 48, 62)));
-                animation.Update(gameTime);
-                move(direction);
-            }
-
-            // Walk right aniamation
-            if (direction.X > 0 && direction.Y == 0)
-            {
-                animation.RemoveFrames();
-                animation.AddFrame(new AnimationFrame(new Rectangle(0, 70, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(48, 70, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(96, 70, 48, 62)));
-                animation.Update(gameTime);
-                move(direction);
-            }
-
-            // Walk up aniamation
-            if (direction.X == 0 && direction.Y < 0)
-            {
-                animation.RemoveFrames();
-                animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(48, 0, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(96, 0, 48, 62)));
-                animation.Update(gameTime);
-                move(direction);
-            }
-
-            // Walk down aniamation
-            if (direction.X == 0 && direction.Y > 0)
-            {
-                animation.RemoveFrames();
-                animation.AddFrame(new AnimationFrame(new Rectangle(0, 128, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(48, 128, 48, 62)));
-                animation.AddFrame(new AnimationFrame(new Rectangle(96, 128, 48, 62)));
-                animation.Update(gameTime);
+                //animatie.Update(gameTime);
+                currentAnimation.Update(gameTime);
                 move(direction);
             }
         }
