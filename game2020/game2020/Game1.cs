@@ -1,4 +1,5 @@
-﻿using game2020.Input;
+﻿using game2020.Collision;
+using game2020.Input;
 using game2020.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,7 @@ namespace game2020
         private Texture2D textureHero;
         private Hero hero;
 
+        CollisionManager collisionManager;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -25,6 +27,7 @@ namespace game2020
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            collisionManager = new CollisionManager();
 
             base.Initialize();
         }
