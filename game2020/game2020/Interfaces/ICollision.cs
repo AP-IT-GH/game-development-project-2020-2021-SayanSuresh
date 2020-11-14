@@ -7,6 +7,6 @@ namespace game2020.Interfaces
 {
     public interface ICollision
     {
-        public Rectangle CollisinRectangle { get; set; }
+        public Rectangle CollisionRectangle { get; set; }
     }
 }

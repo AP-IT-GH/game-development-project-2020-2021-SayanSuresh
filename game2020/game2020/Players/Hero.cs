@@ -10,10 +10,11 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Hero : ITransform
+    public class Hero : ITransform, ICollision
     {
+        private Rectangle _collisionRectangle;
+        public Rectangle CollisionRectangle { get; set; }
         public Vector2 Position { get ; set; }
-        public Rectangle CollisinRectangle { get; set; }
 
         Texture2D heroTexture;
 
@@ -32,8 +33,12 @@ namespace game2020.Players
 
             //Read input for hero class
             this.reader = inputReader;
-
             moveCommand = new MoveCommand();
+
+            Position = new Vector2(0, 0);
+
+            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 48, 62);
+
         }
 
         private void move(Vector2 _direction)
@@ -65,6 +70,9 @@ namespace game2020.Players
                 currentAnimation.Update(gameTime);
                 move(direction);
             }
+
+            _collisionRectangle.X = (int)Position.X;
+            CollisionRectangle = _collisionRectangle;
         }
     }
 }
