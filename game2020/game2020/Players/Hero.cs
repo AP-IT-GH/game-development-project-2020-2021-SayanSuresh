@@ -62,9 +62,49 @@ namespace game2020.Players
 
         public void Update(GameTime gameTime)
         {
+            // Only animation during movement
             var direction = reader.ReadInput();
-            if (direction.X != 0 || direction.Y != 0)
+
+            // Walk Left aniamation
+            if (direction.X < 0 && direction.Y == 0)
             {
+                animation.RemoveFrames();
+                animation.AddFrame(new AnimationFrame(new Rectangle(0, 197, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(48, 197, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 197, 48, 62)));
+                animation.Update(gameTime);
+                move(direction);
+            }
+
+            // Walk right aniamation
+            if (direction.X > 0 && direction.Y == 0)
+            {
+                animation.RemoveFrames();
+                animation.AddFrame(new AnimationFrame(new Rectangle(0, 70, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(48, 70, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 70, 48, 62)));
+                animation.Update(gameTime);
+                move(direction);
+            }
+
+            // Walk up aniamation
+            if (direction.X == 0 && direction.Y < 0)
+            {
+                animation.RemoveFrames();
+                animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(48, 0, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 0, 48, 62)));
+                animation.Update(gameTime);
+                move(direction);
+            }
+
+            // Walk down aniamation
+            if (direction.X == 0 && direction.Y > 0)
+            {
+                animation.RemoveFrames();
+                animation.AddFrame(new AnimationFrame(new Rectangle(0, 128, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(48, 128, 48, 62)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 128, 48, 62)));
                 animation.Update(gameTime);
                 move(direction);
             }

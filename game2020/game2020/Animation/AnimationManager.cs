@@ -23,13 +23,18 @@ namespace game2020.Animation
             currentFrame = frames[0];
         }
 
+        public void RemoveFrames()
+        {
+            frames.Clear();
+        }
+
         public void Update(GameTime gameTime)
         {
             currentFrame = frames[counter];
 
             frameMovement += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (frameMovement >= currentFrame.SourceRectangle.Width / 8)
+            if (frameMovement >= currentFrame.SourceRectangle.Width / 12)
             {
                 counter++;
                 frameMovement = 0;

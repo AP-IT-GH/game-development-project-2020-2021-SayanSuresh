@@ -11,7 +11,7 @@ namespace game2020.Commands
         public Vector2 Speed;
         public MoveCommand()
         {
-            this.Speed = new Vector2(5, 5);
+            this.Speed = new Vector2(10, 10);
         }
 
         public void Execute(ITransform transform, Vector2 direction)
