@@ -1,5 +1,7 @@
 ﻿using game2020.Collision;
+using game2020.GameScreen;
 using game2020.Input;
+using game2020.Interfaces;
 using game2020.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +14,7 @@ namespace game2020
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        IScreenUpdater screenUpdater;
 
         private Texture2D textureHero;
         private Hero hero;
@@ -27,6 +30,9 @@ namespace game2020
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            screenUpdater = new ScreenUpdate();
+            screenUpdater.UpdateScreen(_graphics, 1280, 720);
+
             collisionManager = new CollisionManager();
 
             base.Initialize();
