@@ -3,6 +3,7 @@ using game2020.GameScreen;
 using game2020.Input;
 using game2020.Interfaces;
 using game2020.Players;
+using game2020.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,11 +16,11 @@ namespace game2020
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         IScreenUpdater screenUpdater;
+        Level level;
 
         private Texture2D textureHero;
         private Hero hero;
 
-        CollisionManager collisionManager;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -31,9 +32,11 @@ namespace game2020
         {
             // TODO: Add your initialization logic here
             screenUpdater = new ScreenUpdate();
-            screenUpdater.UpdateScreen(_graphics, 1280, 720);
+            //screenUpdater.UpdateScreen(_graphics, 1280, 720);
+            screenUpdater.UpdateScreen(_graphics, 1480, 720);
 
-            collisionManager = new CollisionManager();
+            level = new Level(Content);
+            level.CreateWorld();
 
             base.Initialize();
         }
@@ -61,6 +64,7 @@ namespace game2020
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
+           
 
             base.Update(gameTime);
         }
@@ -72,6 +76,7 @@ namespace game2020
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
+            level.DrawWorld(_spriteBatch);
             hero.Draw(_spriteBatch);
 
             _spriteBatch.End();
