@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using game2020.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +12,7 @@ namespace game2020.World
     {
         public Texture2D texture1;
         public Texture2D texture2;
+        public Rectangle CollisionRectangle { get; set; }
 
 
         public int[,] tileArray = new int[,]
@@ -25,14 +27,14 @@ namespace game2020.World
             { 2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,}
         };
 
-        private Block[,] blokArray = new Block[8, 22];
+        public Block[,] blokArray = new Block[8, 22];
 
         private ContentManager content;
+
 
         public Level(ContentManager content)
         {
             this.content = content;
-
             InitializeContent();
         }
 
@@ -40,6 +42,23 @@ namespace game2020.World
         {
             texture1 = content.Load<Texture2D>("Level1Content/Tiles/tile1");
             texture2 = content.Load<Texture2D>("Level1Content/Tiles/tile2");
+
+            //for (int x = 0; x < 8; x++)
+            //{
+            //    for (int y = 0; y < 22; y++)
+            //    {
+            //        if (blokArray[x, y].CollisionRectangle != null)
+            //            this.CollisionRectangle = blokArray[x, y].CollisionRectangle;
+            //    }
+            //}
+
+            //foreach (var item in blokArray)
+            //{
+            //    if (item != null)
+            //    {
+            //        this.CollisionRectangle = item.CollisionRectangle;
+            //    }
+            //}
         }
 
 

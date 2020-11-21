@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 namespace game2020
 {
@@ -17,6 +18,8 @@ namespace game2020
         private SpriteBatch _spriteBatch;
         IScreenUpdater screenUpdater;
         Level level;
+        CollisionManager collisionManager;
+
 
         private Texture2D textureHero;
         private Hero hero;
@@ -38,6 +41,8 @@ namespace game2020
             level = new Level(Content);
             level.CreateWorld();
 
+            collisionManager = new CollisionManager();
+
             base.Initialize();
         }
 
@@ -57,6 +62,7 @@ namespace game2020
             hero = new Hero(textureHero, new KeyBoardReader());
         }
 
+        public int i { get; set; } = 0;
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -64,7 +70,15 @@ namespace game2020
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
-           
+
+            foreach (var item in level.blokArray)
+            {
+                if (item != null)
+                {
+                    if (collisionManager.CheckCollision(hero.CollisionRectangle, item.CollisionRectangle))
+                        Debug.WriteLine(i++);
+                }
+            }
 
             base.Update(gameTime);
         }
