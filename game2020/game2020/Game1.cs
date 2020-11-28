@@ -71,21 +71,36 @@ namespace game2020
             // TODO: Add your update logic here
             hero.Update(gameTime);
 
-            foreach (var item in level.blokArray)
-            {
-                if (item != null)
-                {
-                    if (collisionManager.CheckCollision(hero.CollisionRectangle, item.CollisionRectangle))
-                        Debug.WriteLine(i++);
-                }
-            }
+            //foreach (var item in level.blokArray)
+            //{
+            //    if (item != null)
+            //    {
+            //        //hero.Collision(level.Width, level.Height);
+            //        if (collisionManager.CheckCollision(hero.CollisionRectangle, item.CollisionRectangle))
+            //            Debug.WriteLine(i++);
+            //    }
+            //}
 
+            //if (collisionManager.CheckCollision(hero.CollisionRectangle, level.CollisionRectangle))
+            //    Debug.WriteLine(i++);
+
+
+            //for (int x = 0; x < level.blokArray.Length; x++)
+            //{
+            //    for (int y = 0; y < level.blokArray.Length; y++)
+            //    {
+            //        //hero.Collision(level.Width[x, y], level.Height[x, y]);
+            //        if (level.blokArray[x, y].CollisionRectangle != null)
+            //            if (collisionManager.CheckCollision(hero.CollisionRectangle, level.blokArray[x,y].CollisionRectangle))
+            //                Debug.WriteLine(i++);
+            //    }
+            //}
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.BurlyWood);
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();

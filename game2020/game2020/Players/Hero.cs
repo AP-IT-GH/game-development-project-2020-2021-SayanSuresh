@@ -25,15 +25,14 @@ namespace game2020.Players
 
         private IInputReader reader;
         private IGameCommand moveCommand;
-        IEntityAnimation walkRight, walkLeft, walkDown, walkUp, currentAnimation;
+        IEntityAnimation walkRight, walkLeft, currentAnimation;
+
 
         public Hero(Texture2D texture, IInputReader inputReader)
         {
             this.heroTexture = texture;
             walkRight = new WalkRightAnimation(texture, this);
             walkLeft = new WalkLeftAnimation(texture, this);
-            walkDown = new WalkDownAnimation(texture, this);
-            walkUp = new WalkUpAnimation(texture, this);
             currentAnimation = walkRight;
 
             //Read input for hero class
@@ -43,6 +42,32 @@ namespace game2020.Players
 
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 48, 62);
         }
+
+
+
+        //public void Collision(int xoffSet, int yOffSet)
+        //{
+            //if (rectangle.CollisionTopOf())
+            //{
+            //    _collisionRectangle.Y = CollisionRectangle.Height;
+            //    velocity.Y = 0f;
+            //    jump = false;
+            //}
+
+            //if (rectangle.CollisionLeftOf())
+            //    Position = new Vector2(CollisionRectangle.Width - 2, Position.Y);
+            //if (rectangle.CollisionRightOf())
+            //    Position = new Vector2(CollisionRectangle.Width + 2, Position.Y);
+            //if (rectangle.CollisionBottomOf())
+            //    velocity.Y = 1f;
+
+
+            //if (Position.X > xoffSet)
+            //    Position = new Vector2(xoffSet - _collisionRectangle.Height, Position.Y);
+
+            //if (Position.Y > yOffSet )
+            //    Position = new Vector2(Position.X, yOffSet - _collisionRectangle.Height);
+        //}
 
         private void move(Vector2 _direction)
         {
@@ -67,15 +92,6 @@ namespace game2020.Players
 
             jump = Position.Y >= 300;
 
-            if (jump)
-            {
-                Position = new Vector2(Position.X, 300);
-                if (_direction.X == -1)
-                    Position = new Vector2(Position.X, 300);
-                else if (_direction.X == 1)
-                    Position = new Vector2(Position.X, 300);
-            }
-
             moveCommand.Execute(this, _direction);
         }
 
@@ -94,6 +110,7 @@ namespace game2020.Players
             move(direction);
 
             _collisionRectangle.X = (int)Position.X;
+            _collisionRectangle.Y = (int)Position.Y;
             CollisionRectangle = _collisionRectangle;
         }
     }

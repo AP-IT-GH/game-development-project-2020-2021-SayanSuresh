@@ -17,7 +17,7 @@ namespace game2020.World
         {
             _texture = texture;
             Positie = pos;
-            CollisionRectangle = new Rectangle((int)Positie.X, (int)Positie.Y, 64, 64);
+            CollisionRectangle = new Rectangle((int)Positie.X, (int)Positie.Y, texture.Width, texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)

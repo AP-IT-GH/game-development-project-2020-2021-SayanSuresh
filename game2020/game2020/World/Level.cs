@@ -12,7 +12,20 @@ namespace game2020.World
     {
         public Texture2D texture1;
         public Texture2D texture2;
-        public Rectangle CollisionRectangle { get; set; }
+        //public Rectangle CollisionRectangle { get; set; }
+
+        private int[,] width;
+
+        public int[,] Width
+        {
+            get { return width; }
+        }
+        private int[,] height;
+
+        public int[,] Height
+        {
+            get { return height; }
+        }
 
 
         public int[,] tileArray = new int[,]
@@ -43,12 +56,16 @@ namespace game2020.World
             texture1 = content.Load<Texture2D>("Level1Content/Tiles/tile1");
             texture2 = content.Load<Texture2D>("Level1Content/Tiles/tile2");
 
+            //CollisionRectangle = new Rectangle((int)Positie.X, (int)Positie.Y, texture.Width, texture.Height);
+
             //for (int x = 0; x < 8; x++)
             //{
             //    for (int y = 0; y < 22; y++)
             //    {
             //        if (blokArray[x, y].CollisionRectangle != null)
-            //            this.CollisionRectangle = blokArray[x, y].CollisionRectangle;
+            //        {
+            //            blokArray[x, y].CollisionRectangle;
+            //        }
             //    }
             //}
 
@@ -76,6 +93,9 @@ namespace game2020.World
                     {
                         blokArray[x, y] = new Block(texture2, new Vector2(y * 64, x * 64));
                     }
+
+                    //this.width[x, y] = blokArray[x, y]._texture.Width;
+                    //this.height[x, y] = blokArray[x, y]._texture.Height;
                 }
             }
         }
