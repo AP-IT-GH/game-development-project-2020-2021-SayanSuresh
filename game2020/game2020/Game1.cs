@@ -6,6 +6,7 @@ using game2020.GameScreen;
 using game2020.Input;
 using game2020.Interfaces;
 using game2020.Players;
+using game2020.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
