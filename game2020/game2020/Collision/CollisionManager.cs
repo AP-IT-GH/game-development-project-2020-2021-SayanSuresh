@@ -8,46 +8,55 @@ namespace game2020.Collision
 {
     class CollisionManager 
     {
-        public bool CheckCollision(Rectangle rect1, Rectangle rect2)
+        public CollisionManager() { }
+        public CollisionManager(ICollisionHelper helper)
         {
-            if (rect1.Intersects(rect1))
-            {
-                return true;
-            }
-            else
-            return false;
+            this.collisionhelper = helper;
         }
 
-        //public bool CollisionTopOf()
-        //{
-        //    return (R1.Bottom >= R2.Top - 1 &&
-        //            R1.Bottom <= R2.Top + (R2.Height / 2) &&
-        //            R1.Right >= R2.Left + (R2.Width / 5) &&
-        //            R1.Left <= R2.Right - (R2.Width / 5));
-        //}
+        private ICollisionHelper collisionhelper;
 
-        //public bool CollisionBottomOf()
-        //{
-        //    return (R1.Top <= R2.Bottom + (R2.Height / 5) &&
-        //            R1.Top >= R2.Bottom - 1 &&
-        //            R1.Right >= R2.Left + (R2.Width / 5) &&
-        //            R1.Left <= R2.Right - (R2.Width / 5));
-        //}
+        public void ExecuteCollision(Rectangle playerRec, Rectangle newRectangle, int xOffset, int yOffset, ICollisionEntity transform)
+        {
+            if (collisionhelper.CollisionTopOf(playerRec, newRectangle))
+            {
+                playerRec.Y = newRectangle.Y - playerRec.Height;
+                transform.Velocity = new Vector2(transform.Velocity.X, 0f);
+                transform.HasJumped = false;
+            }
 
-        //public bool CollisionLeftOf()
-        //{
-        //    return (R1.Right <= R2.Right &&
-        //            R1.Right >= R2.Left - 5 &&
-        //            R1.Top <= R2.Bottom - (R2.Width / 4) &&
-        //            R1.Bottom >= R2.Top + (R2.Width / 4));
-        //}
+            if (collisionhelper.CollisionLeftOf(playerRec, newRectangle))
+                transform.Position = new Vector2(newRectangle.X - playerRec.Width - 2, transform.Position.Y);
 
-        //public bool CollisionRightOf()
+            if (collisionhelper.CollisionRightOf(playerRec, newRectangle))
+                transform.Position = new Vector2(newRectangle.X + playerRec.Width + 2, transform.Position.Y);
+
+            if (collisionhelper.CollisionBottomOf(playerRec, newRectangle))
+                transform.Velocity = new Vector2(transform.Velocity.X, 7f);
+
+
+            // Trap hero inside window borders 
+            if (transform.Position.X < 0)
+                transform.Position = new Vector2(0, transform.Position.Y);
+
+            if (transform.Position.X > xOffset - playerRec.Width)
+                transform.Position = new Vector2(xOffset - playerRec.Width, transform.Position.Y);
+
+            if (transform.Position.Y < 0)
+                transform.Velocity = new Vector2(transform.Velocity.X, 7.5f);
+
+            if (transform.Position.Y > yOffset - playerRec.Height)
+                transform.Position = new Vector2(transform.Position.X, yOffset - playerRec.Height);
+        }
+
+        //public bool CheckCollision(Rectangle rect1, Rectangle rect2)
         //{
-        //    return (R1.Left >= R2.Left &&
-        //            R1.Left <= R2.Right + 5 &&
-        //            R1.Top <= R2.Bottom - (R2.Width / 4) &&
-        //            R1.Bottom >= R2.Top + (R2.Width / 4));
+        //    if (rect1.Intersects(rect1))
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    return false;
         //}
     }
 }
