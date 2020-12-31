@@ -1,17 +1,13 @@
-﻿using game2020.Interfaces;
-using game2020.World;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using RefactoringCol;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game1
+namespace game2020.World
 {
-    class Level1 : Levels
+    public class Level2 : Levels
     {
-        public Level1()
+        public Level2()
         {
             GenerateLevel(new int[,]
             {
