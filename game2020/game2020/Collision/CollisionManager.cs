@@ -10,13 +10,13 @@ namespace game2020.Collision
 {
     class CollisionManager 
     {
-        private ICollisionHelper collisionhelper;
-
         public CollisionManager() { }
         public CollisionManager(ICollisionHelper helper)
         {
             this.collisionhelper = helper;
         }
+
+        private ICollisionHelper collisionhelper;
 
         public void UpdateCollision(Rectangle playerRec, Rectangle tileRectangle, int xOffset, int yOffset, ICollisionEntity transform)
         {

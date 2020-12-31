@@ -11,39 +11,24 @@ namespace Game1
     {
         protected Texture2D texture;
 
+        private  static ContentManager content;
         private Rectangle rectangle;
+
         public Rectangle Rectangle
         {
             get { return rectangle; }
             protected set { rectangle = value; }
         }
 
-        private static ContentManager content;
         public static ContentManager Content
         {
             protected get { return content; }
             set { content = value; }
         }
 
-        //private ContentManager content;
-        //public ContentManager Content
-        //{
-        //    protected get { return content; }
-        //    set { content = value; }
-        //}
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Rectangle, Color.White);
-        }
-    }
-
-    class CollisionTiles : Tiles
-    {
-        public CollisionTiles(int i, Rectangle newTileRectangle)
-        {
-            texture = Content.Load<Texture2D>("Levels/Level1/tile" + i);
-            this.Rectangle = newTileRectangle;
         }
     }
 }
