@@ -18,12 +18,19 @@ namespace Game1
             protected set { rectangle = value; }
         }
 
-        private  static ContentManager content;
+        private static ContentManager content;
         public static ContentManager Content
         {
             protected get { return content; }
             set { content = value; }
         }
+
+        //private ContentManager content;
+        //public ContentManager Content
+        //{
+        //    protected get { return content; }
+        //    set { content = value; }
+        //}
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -33,10 +40,10 @@ namespace Game1
 
     class CollisionTiles : Tiles
     {
-        public CollisionTiles(int i, Rectangle newRectangle)
+        public CollisionTiles(int i, Rectangle newTileRectangle)
         {
             texture = Content.Load<Texture2D>("Levels/Level1/tile" + i);
-            this.Rectangle = newRectangle;
+            this.Rectangle = newTileRectangle;
         }
     }
 }

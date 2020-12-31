@@ -9,25 +9,13 @@ namespace Game1
 {
     class Levels
     {
+        public Levels() { }
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
+        public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
+
         private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
-        public List<CollisionTiles> CollisionTiles
-        {
-            get { return collisionTiles; }
-        }
-
         private int width, height;
-        public int Width
-        {
-            get { return width; }
-        }
-        public int Height
-        {
-            get { return height; }
-        }
-
-        public Levels()
-        {
-        }
 
         public void Generate(int[,] Map, int size)
         {

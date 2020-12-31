@@ -25,6 +25,7 @@ namespace game2020
         Camera camera;
         CollisionManager collisionManager;
 
+        Tiles tile;
         Level1 lv1;
 
         private Texture2D textureHero;
@@ -44,6 +45,8 @@ namespace game2020
             //screenUpdater.UpdateScreen(_graphics, 1280, 720);
             //screenUpdater.UpdateScreen(_graphics, 1480, 620);
 
+            tile = new Tiles();
+
             gameCommand = new MoveCommand();
 
             collisionManager = new CollisionManager(new CollisionHelper());
@@ -59,6 +62,7 @@ namespace game2020
             camera = new Camera(GraphicsDevice.Viewport);
 
             Tiles.Content = Content;
+            //tile.Content = Content;
             lv1 = new Level1();
 
             textureHero = Content.Load<Texture2D>("Players/thief");
@@ -69,7 +73,7 @@ namespace game2020
 
         private void InitialzeGameObjects()
         {
-            hero = new Hero(textureHero, new KeyBoardReader(), new CollisionHelper(), gameCommand);
+            hero = new Hero(textureHero, new KeyBoardReader(), gameCommand);
             hero.HeroWalkAnimation(new WalkRightAnimation(textureHero, hero), new WalkLeftAnimation(textureHero, hero),
                                    new WalkUpAnimation(textureHero, hero), new WalkDownAnimation(textureHero, hero));
         }
@@ -84,11 +88,7 @@ namespace game2020
 
             foreach (CollisionTiles tile in lv1.CollisionTiles)
             {
-                collisionManager.ExecuteCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
-                //collisionManager.CheckCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height);
-                //collisionManager.CheckUpdate(hero.HasJumped, hero.Velocity, hero.Position);
-                //hero.Collision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height);
-                //hero.CheckCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height);
+                collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
                 camera.Update(hero.Position, lv1.Width, lv1.Height);
             }
 

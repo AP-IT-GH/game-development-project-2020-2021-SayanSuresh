@@ -12,7 +12,7 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Hero : ITransform, ICollision, IMove
+    public class Hero : ITransform, ICollision, ICollisionEntity
     {
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
@@ -37,20 +37,15 @@ namespace game2020.Players
             currentAnimation = walkDown;
         }
 
-        public Hero(Texture2D texture, IInputReader inputReader, ICollisionHelper helper, IGameCommand mvCommand)
+        public Hero(Texture2D texture, IInputReader inputReader, IGameCommand mvCommand)
         {
             this.heroTexture = texture;
-            //walkRight = new WalkRightAnimation(texture, this);
-            //walkLeft = new WalkLeftAnimation(texture, this);
-            //walkUp = new WalkUpAnimation(texture, this);
-            //walkDown = new WalkDownAnimation(texture, this);
             currentAnimation = walkDown;
 
             //Read input for hero class
             this.reader = inputReader;
             this.moveCommand = mvCommand;
 
-            // Testing ColManager
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 62, 110);
             Position = new Vector2(65, 340);
         }
@@ -69,59 +64,16 @@ namespace game2020.Players
             //jumping movement
             if (_direction.Y == -1 && HasJumped == false)
             {
-                //velocity.Y = -9f;
-                //hasJumped = true;
-
                 Velocity = new Vector2(Velocity.X, -9f);
                 HasJumped = true;
             }
 
-            //hasJumped = collisionEntity.CheckCollision().HasJumped;
-            //Position += velocity;
-            //if (velocity.Y < 20)
-                //velocity += new Vector2(Velocity.X, 0.9f);
             Position += Velocity;
             if (Velocity.Y < 20)
                 Velocity += new Vector2(Velocity.X, 0.9f);
 
-            //moveCommand.GetInfo(this);
             moveCommand.Execute(this, _direction);
-            //collisionEntity.ExecuteCollision(this);
         }
-
-        //public void Collision(Rectangle playerRec, Rectangle newRectangle, int xOffset, int yOffset)
-        //{
-
-        //    if (collisionhelper.CollisionTopOf(playerRec, newRectangle))
-        //    {
-        //        _collisionRectangle.Y = newRectangle.Y - _collisionRectangle.Height;
-        //        velocity.Y = 0f;
-        //        hasJumped = false;
-        //    }
-
-        //    if (collisionhelper.CollisionLeftOf(playerRec, newRectangle))
-        //        Position = new Vector2(newRectangle.X - _collisionRectangle.Width - 2, Position.Y);
-
-        //    if (collisionhelper.CollisionRightOf(playerRec, newRectangle))
-        //        Position = new Vector2(newRectangle.X + _collisionRectangle.Width + 2, Position.Y);
-
-        //    if (collisionhelper.CollisionBottomOf(playerRec, newRectangle))
-        //        velocity.Y = 7f;
-
-
-        //    // Trap hero inside window borders 
-        //    if (Position.X < 0)
-        //        Position = new Vector2(0, Position.Y);
-
-        //    if (Position.X > xOffset - _collisionRectangle.Width)
-        //        Position = new Vector2(xOffset - _collisionRectangle.Width, Position.Y);
-
-        //    if (Position.Y < 0)
-        //        velocity.Y = 7.5f;
-
-        //    if (Position.Y > yOffset - _collisionRectangle.Height)
-        //        Position = new Vector2(Position.X, yOffset - _collisionRectangle.Height);
-        //}
 
         public void Draw(SpriteBatch spriteBatch)
         {

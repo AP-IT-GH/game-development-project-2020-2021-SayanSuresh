@@ -7,9 +7,8 @@ namespace game2020.Interfaces
 {
     public interface ICollisionEntity
     {
-        //public IMove CheckCollision();
-        //public bool IsJumping(Rectangle playerRec, Rectangle newRectangle);
-
-        public void ExecuteCollision(ITransform transform);
+        public bool HasJumped { get; set; }
+        public Vector2 Velocity { get; set; }
+        Vector2 Position { get; set; }
     }
 }
