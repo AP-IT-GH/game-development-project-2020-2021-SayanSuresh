@@ -20,14 +20,13 @@ namespace game2020
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        IScreenUpdater screenUpdater;
-        IGameCommand gameCommand;
+        private IScreenUpdater screenUpdater;
+        private IGameCommand gameCommand;
 
-        Camera camera;
-        CollisionManager collisionManager;
+        private Camera camera;
+        private CollisionManager collisionManager;
 
-        Tiles tile;
-        Level1 lv1;
+        private Level1 lv1;
 
         private Texture2D textureHero;
         private Hero hero;
@@ -46,8 +45,6 @@ namespace game2020
             //screenUpdater.UpdateScreen(_graphics, 1280, 720);
             //screenUpdater.UpdateScreen(_graphics, 1480, 620);
 
-            tile = new Tiles();
-
             gameCommand = new MoveCommand();
 
             collisionManager = new CollisionManager(new CollisionHelper());
@@ -63,11 +60,9 @@ namespace game2020
             camera = new Camera(GraphicsDevice.Viewport);
 
             Tiles.Content = Content;
-            //tile.Content = Content;
             lv1 = new Level1();
 
             textureHero = Content.Load<Texture2D>("Players/thief");
-
 
             InitialzeGameObjects();
         }
