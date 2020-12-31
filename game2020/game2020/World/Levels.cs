@@ -23,7 +23,11 @@ namespace game2020.World
             }
         }
 
+<<<<<<< HEAD
         protected void GenerateLevel(int[,] Map, int size)
+=======
+        public void GenerateLevel(int[,] Map, int size)
+>>>>>>> MakingLevel
         {
             for (int x = 0; x < Map.GetLength(1); x++)
             {
