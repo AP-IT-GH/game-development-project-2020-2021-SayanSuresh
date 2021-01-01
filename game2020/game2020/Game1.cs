@@ -35,6 +35,7 @@ namespace game2020
 
         private Texture2D textureHero;
         private Hero hero;
+        private Enemy enemy;
 
         public Game1()
         {
@@ -79,6 +80,9 @@ namespace game2020
 
             textureHero = Content.Load<Texture2D>("Players/thief");
 
+            IsMouseVisible = true;
+            enemy = new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(400, 400), 150);
+
             InitialzeGameObjects();
         }
 
@@ -105,15 +109,16 @@ namespace game2020
 
 
 
-
             //scrollings[0].Update();
             scrollings[1].Update();
 
             hero.Update(gameTime);
+            enemy.Update(hero);
 
             foreach (CollisionTiles tile in lv1.CollisionTiles)
             {
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
+                collisionManager.UpdateCollision(enemy.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
                 camera.Update(hero.Position, lv1.Width, lv1.Height);
             }
 
@@ -138,6 +143,8 @@ namespace game2020
             lv1.Draw(_spriteBatch);
 
             hero.Draw(_spriteBatch);
+
+            enemy.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

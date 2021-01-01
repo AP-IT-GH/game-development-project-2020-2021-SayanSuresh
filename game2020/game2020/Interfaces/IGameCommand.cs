@@ -8,6 +8,5 @@ namespace game2020.Interfaces
     public interface IGameCommand
     {
         void Execute(ITransform transform, Vector2 direction);
-        void Undo();
     }
 }
