@@ -47,7 +47,7 @@ namespace game2020.Players
             this.moveCommand = mvCommand;
 
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 62, 110);
-            Position = new Vector2(65, 340);
+            Position = new Vector2(30, 30);
         }
 
         private void move(Vector2 _direction)
