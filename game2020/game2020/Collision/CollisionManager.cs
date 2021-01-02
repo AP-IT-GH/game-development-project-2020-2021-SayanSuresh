@@ -8,8 +8,9 @@ using System.Text;
 
 namespace game2020.Collision
 {
-    class CollisionManager 
+    class CollisionManager : ICheckCollision
     {
+        public bool CollisionWithBot { get; set; }
         public CollisionManager() { }
         public CollisionManager(ICollisionHelper helper)
         {
@@ -54,8 +55,12 @@ namespace game2020.Collision
         public bool CheckCollision(Rectangle rect1, Rectangle rect2)
         {
             if (rect1.Intersects(rect2))
+            {
+                CollisionWithBot = true;
                 return true;
+            }
 
+            CollisionWithBot = false;
             return false;
         }
     }

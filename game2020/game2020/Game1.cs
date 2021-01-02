@@ -30,6 +30,7 @@ namespace game2020
 
         private Camera camera;
         private CollisionManager collisionManager;
+        private CollisionWithEnemy collisionWithEnemy;
 
         private Level1 lv1;
 
@@ -56,6 +57,7 @@ namespace game2020
             gameCommand = new MoveCommand();
 
             collisionManager = new CollisionManager(new CollisionHelper());
+            collisionWithEnemy = new CollisionWithEnemy();
 
             enemies = new List<Enemy>();
 
@@ -113,20 +115,29 @@ namespace game2020
                 scrollings[1].rectangle.X = scrollings[2].rectangle.X + scrollings[2].texture.Width;
 
 
-
             //scrollings[0].Update();
             scrollings[1].Update();
 
             hero.Update(gameTime);
+            collisionWithEnemy.HandleHeroSpawn(collisionManager, hero);
 
             foreach (Enemy enemy in enemies)
+            {
                 enemy.Update(hero);
+            }
+            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[1].CollisionRectangle);
+            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[3].CollisionRectangle);
+            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[2].CollisionRectangle);
+
 
             foreach (CollisionTiles tile in lv1.CollisionTiles)
             {
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
                 camera.Update(hero.Position, lv1.Width, lv1.Height);
             }
+
+            foreach (Enemy enemy in enemies)
+                collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
 
             base.Update(gameTime);
         }
