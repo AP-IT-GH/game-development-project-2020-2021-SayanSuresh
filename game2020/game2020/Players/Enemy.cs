@@ -8,16 +8,12 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Enemy : ICollision, ITransform, ICollisionEntity
+    public class Enemy : ICollision
     {
-        public bool HasJumped { get; set; }
-        public Vector2 Velocity { get; set; }
-        public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
 
         private Rectangle _collisionRectangle;
-        private Texture2D texture;
-        private Rectangle rectangle;
+        private Texture2D enemyTexture;
         private Vector2 position;
         private Vector2 origin;
         private Vector2 velocity;
@@ -28,23 +24,22 @@ namespace game2020.Players
         private float oldDistance;
         private float playerDistance;
 
-        private IGameCommand moveCommand;
 
-        public Enemy(Texture2D newTexture, Vector2 newPosition, float newDistance)
+        public Enemy(Texture2D texture, Vector2 newPosition, float newDistance)
         {
-            texture = newTexture;
+            enemyTexture = texture;
             position = newPosition;
             distance = newDistance;
 
             oldDistance = distance;
 
-            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+            _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width, enemyTexture.Height);
         }
 
         public void Update(ITransform player)
         {
             position += velocity;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            origin = new Vector2(enemyTexture.Width / 2, enemyTexture.Height / 2);
 
             if (distance <= 0)
             {
@@ -71,8 +66,8 @@ namespace game2020.Players
                     velocity.X = 0f;
             }
 
-            _collisionRectangle.X = (int)Position.X;
-            _collisionRectangle.Y = (int)Position.Y;
+            _collisionRectangle.X = (int)position.X;
+            _collisionRectangle.Y = (int)position.Y;
             CollisionRectangle = _collisionRectangle;
         }
 
@@ -111,9 +106,9 @@ namespace game2020.Players
         public void Draw(SpriteBatch spriteBatch)
         {
             if (velocity.X > 0)
-                spriteBatch.Draw(texture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.FlipHorizontally, 0f);
             else
-                spriteBatch.Draw(texture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

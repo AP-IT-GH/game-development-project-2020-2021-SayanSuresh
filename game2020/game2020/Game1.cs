@@ -35,7 +35,7 @@ namespace game2020
 
         private Texture2D textureHero;
         private Hero hero;
-        private Enemy enemy;
+        private List<Enemy> enemies;
 
         public Game1()
         {
@@ -56,6 +56,8 @@ namespace game2020
             gameCommand = new MoveCommand();
 
             collisionManager = new CollisionManager(new CollisionHelper());
+
+            enemies = new List<Enemy>();
 
             base.Initialize();
         }
@@ -81,7 +83,10 @@ namespace game2020
             textureHero = Content.Load<Texture2D>("Players/thief");
 
             IsMouseVisible = true;
-            enemy = new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(400, 400), 150);
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(1200, 95), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(800, 200), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(600, 610), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(400, 400), 150));
 
             InitialzeGameObjects();
         }
@@ -113,12 +118,13 @@ namespace game2020
             scrollings[1].Update();
 
             hero.Update(gameTime);
-            enemy.Update(hero);
+
+            foreach (Enemy enemy in enemies)
+                enemy.Update(hero);
 
             foreach (CollisionTiles tile in lv1.CollisionTiles)
             {
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
-                collisionManager.UpdateCollision(enemy.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
                 camera.Update(hero.Position, lv1.Width, lv1.Height);
             }
 
@@ -136,15 +142,14 @@ namespace game2020
                                camera.Transform);
 
             foreach (Scrolling scrolling in scrollings)
-            {
                 scrolling.Draw(_spriteBatch);
-            }
 
             lv1.Draw(_spriteBatch);
 
             hero.Draw(_spriteBatch);
 
-            enemy.Draw(_spriteBatch);
+            foreach (Enemy enemy in enemies)
+                enemy.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

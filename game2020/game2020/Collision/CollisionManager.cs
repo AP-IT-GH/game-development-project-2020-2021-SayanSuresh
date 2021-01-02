@@ -50,5 +50,13 @@ namespace game2020.Collision
             if (transform.Position.Y > yOffset - playerRec.Height)
                 transform.Position = new Vector2(transform.Position.X, yOffset - playerRec.Height);
         }
+
+        public bool CheckCollision(Rectangle rect1, Rectangle rect2)
+        {
+            if (rect1.Intersects(rect2))
+                return true;
+
+            return false;
+        }
     }
 }
