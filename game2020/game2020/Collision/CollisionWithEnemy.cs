@@ -13,7 +13,7 @@ namespace game2020.Collision
         public void HandleHeroSpawn(ICheckCollision collision, ITransform heroTransform)
         {
             if (collision.CollisionWithBot)
-                heroTransform.Position = new Vector2(30, 30);
+                heroTransform.Position = new Vector2(200, 30);
             //Debug.WriteLine($"testi{i++}");
             //else
             //heroTransform.Position = new Vector2(30, 30);

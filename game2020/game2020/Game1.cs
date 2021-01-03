@@ -119,14 +119,17 @@ namespace game2020
             scrollings[1].Update();
 
             hero.Update(gameTime);
-            collisionWithEnemy.HandleHeroSpawn(collisionManager, hero);
 
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update(hero);
+                collisionWithEnemy.HandleHeroSpawn(collisionManager, hero);
+                collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
             }
+
+            //foreach (Enemy enemy in enemies)
+            //    collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
             //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[1].CollisionRectangle);
-            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[3].CollisionRectangle);
             //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[2].CollisionRectangle);
 
 
@@ -135,9 +138,6 @@ namespace game2020
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, lv1.Width, lv1.Height, hero);
                 camera.Update(hero.Position, lv1.Width, lv1.Height);
             }
-
-            foreach (Enemy enemy in enemies)
-                collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
 
             base.Update(gameTime);
         }
