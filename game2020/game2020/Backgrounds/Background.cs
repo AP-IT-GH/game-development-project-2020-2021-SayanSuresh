@@ -6,7 +6,7 @@ using System.Text;
 
 namespace game2020.Backgrounds
 {
-    public class Backgrounds
+    public abstract class Background
     {
         public Texture2D texture;
         public Rectangle rectangle;

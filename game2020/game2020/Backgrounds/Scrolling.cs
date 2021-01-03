@@ -6,7 +6,7 @@ using System.Text;
 
 namespace game2020.Backgrounds
 {
-    public class Scrolling : Backgrounds
+    public class Scrolling : Background
     {
         public Scrolling(Texture2D newTexture, Rectangle newRectangle)
         {
