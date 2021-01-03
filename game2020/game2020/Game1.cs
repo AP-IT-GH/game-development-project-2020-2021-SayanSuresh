@@ -30,11 +30,13 @@ namespace game2020
 
         private Camera camera;
         private CollisionManager collisionManager;
+        private CollisionWithEnemy collisionWithEnemy;
 
         private Level1 lv1;
 
         private Texture2D textureHero;
         private Hero hero;
+        private List<Enemy> enemies;
 
         public Game1()
         {
@@ -55,6 +57,9 @@ namespace game2020
             gameCommand = new MoveCommand();
 
             collisionManager = new CollisionManager(new CollisionHelper());
+            collisionWithEnemy = new CollisionWithEnemy();
+
+            enemies = new List<Enemy>();
 
             base.Initialize();
         }
@@ -78,6 +83,12 @@ namespace game2020
             lv1 = new Level1();
 
             textureHero = Content.Load<Texture2D>("Players/thief");
+
+            IsMouseVisible = true;
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(1200, 95), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(800, 200), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(600, 610), 150));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("Levels/Level1/52"), new Vector2(400, 400), 150));
 
             InitialzeGameObjects();
         }
@@ -104,12 +115,23 @@ namespace game2020
                 scrollings[1].rectangle.X = scrollings[2].rectangle.X + scrollings[2].texture.Width;
 
 
-
-
             //scrollings[0].Update();
             scrollings[1].Update();
 
             hero.Update(gameTime);
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(hero);
+                collisionWithEnemy.HandleHeroSpawn(collisionManager, hero);
+                collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
+            }
+
+            //foreach (Enemy enemy in enemies)
+            //    collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle);
+            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[1].CollisionRectangle);
+            //collisionManager.CheckCollision(hero.CollisionRectangle, enemies[2].CollisionRectangle);
+
 
             foreach (CollisionTiles tile in lv1.CollisionTiles)
             {
@@ -131,13 +153,14 @@ namespace game2020
                                camera.Transform);
 
             foreach (Scrolling scrolling in scrollings)
-            {
                 scrolling.Draw(_spriteBatch);
-            }
 
             lv1.Draw(_spriteBatch);
 
             hero.Draw(_spriteBatch);
+
+            foreach (Enemy enemy in enemies)
+                enemy.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

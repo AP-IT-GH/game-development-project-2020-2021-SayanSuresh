@@ -19,10 +19,5 @@ namespace game2020.Commands
             direction *= this.Speed;
             transform.Position += direction;
         }
-
-        public void Undo()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

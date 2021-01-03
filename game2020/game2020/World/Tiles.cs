@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Game1
 {
-    public class Tiles
+    public abstract class Tiles
     {
         protected Texture2D texture;
 

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace game2020.Interfaces
 {
-    public interface IGameCommand
+    public interface ICheckCollision
     {
-        void Execute(ITransform transform, Vector2 direction);
+        public bool CollisionWithBot { get; set; }
     }
 }

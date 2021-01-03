@@ -4,12 +4,14 @@ using Microsoft.Xna.Framework;
 using RefactoringCol;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace game2020.Collision
 {
-    class CollisionManager 
+    class CollisionManager : ICheckCollision
     {
+        public bool CollisionWithBot { get; set; } = false;
         public CollisionManager() { }
         public CollisionManager(ICollisionHelper helper)
         {
@@ -49,6 +51,14 @@ namespace game2020.Collision
 
             if (transform.Position.Y > yOffset - playerRec.Height)
                 transform.Position = new Vector2(transform.Position.X, yOffset - playerRec.Height);
+        }
+
+        public void CheckCollision(Rectangle rect1, Rectangle rect2)
+        {
+            if (rect1.Intersects(rect2))
+                CollisionWithBot = true;
+            else
+                CollisionWithBot = false;
         }
     }
 }
