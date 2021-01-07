@@ -65,20 +65,31 @@ namespace game2020.Collision
 
         public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform heroTransform)
         {
+            // Level 1 exit
             if (texture.Name == "Levels/Level1/65")
             {
                 if (playerRec.Intersects(tileRectangle))
                 {
                     IsCollisionWithExit = true;
-                    heroTransform.Position = new Vector2(30, 30);
+                    heroTransform.Position = new Vector2(0, 30);
                 }
             }
 
+            // Level 1 water
+            if (texture.Name == "Levels/Level1/263")
+            {
+                if (playerRec.Intersects(tileRectangle))
+                {
+                    heroTransform.Position = new Vector2(0, 300);
+                }
+            }
+
+            // Level 2 lava
             if (texture.Name == "Levels/Level1/262")
             {
                 if (playerRec.Intersects(tileRectangle))
                 {
-                    heroTransform.Position = new Vector2(30, 30);
+                    heroTransform.Position = new Vector2(0, 300);
                 }
             }
         }

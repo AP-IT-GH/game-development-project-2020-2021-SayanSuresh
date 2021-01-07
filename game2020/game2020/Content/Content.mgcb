@@ -889,6 +889,18 @@
 /processorParam:TextureFormat=Color
 /build:Levels/Level1/9.png
 
+#begin Levels/Level1/boxCoin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Levels/Level1/boxCoin.png;Levels/Level1/264.png
+
 #begin Levels/Level1/liquidLava.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -912,6 +924,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Levels/Level1/liquidLavaTop.png;Levels/Level1/261.png
+
+#begin Levels/Level1/liquidWater.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Levels/Level1/liquidWater.png;Levels/Level1/263.png
 
 #begin Menu/deadText.png
 /importer:TextureImporter

@@ -16,7 +16,7 @@ namespace game2020.Collision
             if (collision.IsCollision)
             {
                 IsCollision = true;
-                heroTransform.Position = new Vector2(30, 30);
+                heroTransform.Position = new Vector2(0, 30);
             }
         }
     }

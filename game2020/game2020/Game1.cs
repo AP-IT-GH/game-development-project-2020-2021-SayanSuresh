@@ -147,7 +147,7 @@ namespace game2020
             // Intro menu
             intro(gameTime);
 
-            if (collisionManager.IsCollisionWithExit)
+            if (!collisionManager.IsCollisionWithExit)
                 level = lv2;
 
             // Scrolling backgrounds
@@ -196,7 +196,7 @@ namespace game2020
                                BlendState.AlphaBlend,
                                null, null, null, null,
                                camera.Transform);
-
+            
             if (!gameStarted)
             {
                 if (count < 2)
