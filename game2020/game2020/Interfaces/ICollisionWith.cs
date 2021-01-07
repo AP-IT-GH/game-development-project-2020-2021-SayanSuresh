@@ -5,8 +5,8 @@ using System.Text;
 
 namespace game2020.Interfaces
 {
-    public interface ICollision
+    public interface ICollisionWith
     {
-        public Rectangle CollisionRectangle { get; set; }
+        public bool IsCollision { get; set; }
     }
 }

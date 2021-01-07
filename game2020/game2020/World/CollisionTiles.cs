@@ -7,7 +7,7 @@ using System.Text;
 
 namespace game2020.World
 {
-    public class CollisionTiles : Tiles
+    public class CollisionTiles : Tile
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {

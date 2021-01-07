@@ -9,7 +9,9 @@ namespace game2020.Controls
 {
     public class Button
     {
-        // Fields
+        // Om die kleueren aan te passen heb ik wat referentie gebruikt van dit link:
+        // https://github.com/MonoGame/MonoGame/pull/4962
+
         private Color color = new Color(255, 255, 255, 255);
         private Texture2D buttonTexture;
         private Vector2 position;
@@ -41,7 +43,7 @@ namespace game2020.Controls
                 if (color.A == 0) 
                     down = true;
                 if (down) 
-                    color.A += 3; 
+                    color.A += 3;    
                 else 
                     color.A -= 3;
 

@@ -7,11 +7,12 @@ using System.Text;
 
 namespace Game1
 {
-    public abstract class Tiles
+    public abstract class Tile
     {
-        protected Texture2D texture;
+        public Texture2D texture;
 
         private  static ContentManager content;
+        //private ContentManager getContent;
         private Rectangle rectangle;
 
         public Rectangle Rectangle
@@ -25,6 +26,11 @@ namespace Game1
             protected get { return content; }
             set { content = value; }
         }
+
+        //public void GetContent(ContentManager Content)
+        //{
+        //    this.getContent = Content;
+        //}
 
         public void Draw(SpriteBatch spriteBatch)
         {

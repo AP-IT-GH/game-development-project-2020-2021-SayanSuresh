@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using game2020.Backgrounds;
+using game2020.Players;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,14 +9,26 @@ using System.Text;
 
 namespace game2020.World
 {
-    public abstract class Levels
+    public abstract class Level
     {
+        protected ContentManager content;
+        protected abstract void addLayers();
+        protected abstract void addScrollingLayers();
+        protected abstract void addEnemies();
+
         public int Width { get { return width; } }
         public int Height { get { return height; } }
+
+        public abstract List<Layer> Layers { get; set; }
+        public abstract List<Scrolling> ScrollingLayer { get; set; }
+        public abstract List<Enemy> Enemies { get; set; }
+
+        public Level(ContentManager Content) { this.content = Content; }
         public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
 
         private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
         protected int width, height;
+       
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -22,14 +37,13 @@ namespace game2020.World
                 tile.Draw(spriteBatch);
             }
         }
-
-        protected void GenerateLevel(int[,] Map, int size)
+        protected void GenerateLevel(int[,] map, int size)
         {
-            for (int x = 0; x < Map.GetLength(1); x++)
+            for (int x = 0; x < map.GetLength(1); x++)
             {
-                for (int y = 0; y < Map.GetLength(0); y++)
+                for (int y = 0; y < map.GetLength(0); y++)
                 {
-                    int number = Map[y, x];
+                    int number = map[y, x];
 
                     if (number > 0)
                         CollisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
