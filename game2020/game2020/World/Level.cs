@@ -21,6 +21,7 @@ namespace game2020.World
 
         protected int width, height;
         protected ContentManager content;
+        protected abstract string path { get; set; }
         protected abstract void addLayers();
         protected abstract void addScrollingLayers();
         protected abstract void addEnemies();
@@ -44,7 +45,7 @@ namespace game2020.World
                     int number = map[y, x];
 
                     if (number > 0)
-                        CollisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
+                        CollisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), path));
 
                     width = (x + 1) * size;
                     height = (y + 1) * size;

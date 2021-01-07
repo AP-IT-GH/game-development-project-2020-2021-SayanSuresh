@@ -9,9 +9,9 @@ namespace game2020.World
 {
     public class CollisionTiles : Tile
     {
-        public CollisionTiles(int i, Rectangle newRectangle)
+        public CollisionTiles(int i, Rectangle newRectangle, string path)
         {
-            texture = Content.Load<Texture2D>("Levels/Level1/" + i);
+            texture = Content.Load<Texture2D>(path + i);
             this.Rectangle = newRectangle;
         }
     }

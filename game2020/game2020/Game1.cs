@@ -93,7 +93,6 @@ namespace game2020
             deadTextTexture = Content.Load<Texture2D>("Menu/deadText");
             deadTextRectangle = new Rectangle(100, 0, deadTextTexture.Width, deadTextTexture.Height);
 
-            // Following hero
             camera = new Camera(GraphicsDevice.Viewport);
 
             // Load players content

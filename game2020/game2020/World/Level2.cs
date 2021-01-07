@@ -11,12 +11,14 @@ namespace game2020.World
 {
     public class Level2 : Level
     {
+        protected override string path { get; set; }
         public override List<Layer> Layers { get; set; }
         public override List<Scrolling> ScrollingLayer { get; set; }
         public override List<Enemy> Enemies { get; set; }
 
         public Level2(ContentManager content) : base(content)
         {
+            path = "Levels/Level1/";
             Layers = new List<Layer>();
             ScrollingLayer = new List<Scrolling>();
             Enemies = new List<Enemy>();
