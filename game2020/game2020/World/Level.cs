@@ -11,24 +11,21 @@ namespace game2020.World
 {
     public abstract class Level
     {
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
+        public abstract List<Enemy> Enemies { get; set; }
+        public abstract List<Layer> Layers { get; set; }
+        public abstract List<Scrolling> ScrollingLayer { get; set; }
+        public Level(ContentManager Content) { this.content = Content; }
+        public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
+
+        protected int width, height;
         protected ContentManager content;
         protected abstract void addLayers();
         protected abstract void addScrollingLayers();
         protected abstract void addEnemies();
 
-        public int Width { get { return width; } }
-        public int Height { get { return height; } }
-
-        public abstract List<Layer> Layers { get; set; }
-        public abstract List<Scrolling> ScrollingLayer { get; set; }
-        public abstract List<Enemy> Enemies { get; set; }
-
-        public Level(ContentManager Content) { this.content = Content; }
-        public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
-
         private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
-        protected int width, height;
-       
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -37,6 +34,7 @@ namespace game2020.World
                 tile.Draw(spriteBatch);
             }
         }
+
         protected void GenerateLevel(int[,] map, int size)
         {
             for (int x = 0; x < map.GetLength(1); x++)

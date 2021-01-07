@@ -9,7 +9,7 @@ namespace game2020.Controls
 {
     public class Button
     {
-        // Om die kleueren aan te passen heb ik wat referentie gebruikt van dit link:
+        // Om die kleueren aan te passen heb ik wat referentie gebruikt van deze link:
         // https://github.com/MonoGame/MonoGame/pull/4962
 
         private Color color = new Color(255, 255, 255, 255);

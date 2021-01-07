@@ -25,11 +25,11 @@ namespace game2020
         private SpriteBatch _spriteBatch;
 
         // Menu
-        bool gameStarted = false;
-        int count = 0;
-        Texture2D deadTextTexture;
-        Rectangle deadTextRectangle;
-        Button btnPlay, btnQuit;
+        private bool gameStarted = false;
+        private int count = 0;
+        private Texture2D deadTextTexture;
+        private Rectangle deadTextRectangle;
+        private Button btnPlay, btnQuit;
 
         private IScreenUpdater screenUpdater;
         private IGameCommand gameCommand;
@@ -59,7 +59,7 @@ namespace game2020
 
             // Option for resizing screen
             screenUpdater = new ScreenUpdate();
-            //screenUpdater.UpdateScreen(_graphics, 1280, 720);
+            // screenUpdater.UpdateScreen(_graphics, 1280, 720);
 
             // Menu buttons
             btnPlay = new Button();
@@ -82,7 +82,7 @@ namespace game2020
 
             // Load level
             Tile.Content = Content;
-            //Tile.GetContent(Content);
+            // Tile.GetContent(Content);
             lv1 = new Level1(Content);
             lv2 = new Level2(Content);
             level = lv1;
@@ -121,7 +121,7 @@ namespace game2020
                     collisionWithEnemy.IsCollision = false;
                 }
 
-                // player and background update
+                // Player and background update
                 hero.Update(gameTime);
                 foreach (Scrolling scrolling in level.ScrollingLayer)
                     scrolling.Update();
@@ -152,14 +152,9 @@ namespace game2020
                 level = lv2;
 
             // Scrolling backgrounds
-            //if (level.ScrollingLayer.rectangle.X + level.ScrollingLayer.texture.Width <= 0)
-            //    level.ScrollingLayer.rectangle.X = 3200;
-
             foreach (Scrolling scrolling in level.ScrollingLayer)
-            {
                 if (scrolling.rectangle.X + scrolling.texture.Width <= 0)
                     scrolling.rectangle.X = 3200;
-            }
 
             foreach (CollisionTiles tile in level.CollisionTiles)
             {
@@ -205,12 +200,13 @@ namespace game2020
 
             if (!gameStarted)
             {
-                count++;
+                if (count < 2)
+                    count++;
 
                 foreach (Layer layer in level.Layers)
                     layer.Draw(_spriteBatch);
 
-                //level.ScrollingLayer.Draw(_spriteBatch);
+                // level.ScrollingLayer.Draw(_spriteBatch);
                 foreach (Scrolling scrolling in level.ScrollingLayer)
                     scrolling.Draw(_spriteBatch);
 
