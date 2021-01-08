@@ -11,30 +11,26 @@ namespace Game1
     {
         public Texture2D texture;
 
-        private  static ContentManager content;
-        //private ContentManager getContent;
         private Rectangle rectangle;
-
         public Rectangle Rectangle
         {
             get { return rectangle; }
             protected set { rectangle = value; }
         }
 
-        public static ContentManager Content
-        {
-            protected get { return content; }
-            set { content = value; }
-        }
-
-        //public void GetContent(ContentManager Content)
-        //{
-        //    this.getContent = Content;
-        //}
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Rectangle, Color.White);
         }
+
+        //protected ContentManager content { get; set; }
+        //public Tile(ContentManager content) { this.content = content; }
+
+        //private  static ContentManager content;
+        //public static ContentManager Content
+        //{
+        //    protected get { return content; }
+        //    set { content = value; }
+        //}
     }
 }

@@ -32,7 +32,7 @@ namespace game2020.Players
 
             oldDistance = distance;
 
-            _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width, enemyTexture.Height);
+            _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width-30, enemyTexture.Height-30);
         }
 
         public void Update(ITransform player)

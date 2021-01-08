@@ -81,8 +81,7 @@ namespace game2020
             // TODO: use this.Content to load your game content here
 
             // Load level
-            Tile.Content = Content;
-            // Tile.GetContent(Content);
+            //Tile.Content = Content;
             lv1 = new Level1(Content);
             lv2 = new Level2(Content);
             level = lv1;
@@ -147,14 +146,14 @@ namespace game2020
             // Intro menu
             intro(gameTime);
 
-            if (!collisionManager.IsCollisionWithExit)
+            if (collisionManager.IsCollisionWithExit)
                 level = lv2;
 
             // Scrolling backgrounds
             foreach (Scrolling scrolling in level.ScrollingLayer)
                 if (scrolling.rectangle.X + scrolling.texture.Width <= 0)
                     scrolling.rectangle.X = 3200;
-
+           
             foreach (CollisionTiles tile in level.CollisionTiles)
             {
                 camera.Update(hero.Position, level.Width, level.Height);
@@ -196,7 +195,7 @@ namespace game2020
                                BlendState.AlphaBlend,
                                null, null, null, null,
                                camera.Transform);
-            
+
             if (!gameStarted)
             {
                 if (count < 2)
