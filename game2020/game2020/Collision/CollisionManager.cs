@@ -89,7 +89,7 @@ namespace game2020.Collision
             {
                 if (playerRec.Intersects(tileRectangle))
                 {
-                    heroTransform.Position = new Vector2(0, 300);
+                    heroTransform.Position = new Vector2(0, 1000);
                 }
             }
         }
