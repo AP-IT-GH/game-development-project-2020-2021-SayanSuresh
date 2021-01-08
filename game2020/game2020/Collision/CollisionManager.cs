@@ -1,6 +1,8 @@
 ﻿using game2020.Commands;
 using game2020.Interfaces;
+using game2020.World;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using RefactoringCol;
 using System;
 using System.Collections.Generic;
@@ -9,33 +11,31 @@ using System.Text;
 
 namespace game2020.Collision
 {
-    class CollisionManager : ICheckCollision
+    class CollisionManager : ICollisionWith
     {
-        public bool CollisionWithBot { get; set; } = false;
+        public bool IsCollision { get; set; }
+        public bool IsCollisionWithExit { get; set; }
         public CollisionManager() { }
-        public CollisionManager(ICollisionHelper helper)
-        {
-            this.collisionhelper = helper;
-        }
+        public CollisionManager(ICollisionHelper helper) { this.collisionhelper = helper; }
 
         private ICollisionHelper collisionhelper;
 
         public void UpdateCollision(Rectangle playerRec, Rectangle tileRectangle, int xOffset, int yOffset, ICollisionEntity transform)
         {
-            if (collisionhelper.CollisionTopOf(playerRec, tileRectangle))
+            if (collisionhelper.CollisionBottom(playerRec, tileRectangle))
             {
                 playerRec.Y = tileRectangle.Y - playerRec.Height;
                 transform.Velocity = new Vector2(transform.Velocity.X, 0f);
                 transform.HasJumped = false;
             }
 
-            if (collisionhelper.CollisionLeftOf(playerRec, tileRectangle))
+            if (collisionhelper.CollisionRight(playerRec, tileRectangle))
                 transform.Position = new Vector2(tileRectangle.X - playerRec.Width - 2, transform.Position.Y);
 
-            if (collisionhelper.CollisionRightOf(playerRec, tileRectangle))
+            if (collisionhelper.CollisionLeft(playerRec, tileRectangle))
                 transform.Position = new Vector2(tileRectangle.X + playerRec.Width + 2, transform.Position.Y);
 
-            if (collisionhelper.CollisionBottomOf(playerRec, tileRectangle))
+            if (collisionhelper.CollisionTop(playerRec, tileRectangle))
                 transform.Velocity = new Vector2(transform.Velocity.X, 7f);
 
 
@@ -56,9 +56,31 @@ namespace game2020.Collision
         public void CheckCollision(Rectangle rect1, Rectangle rect2)
         {
             if (rect1.Intersects(rect2))
-                CollisionWithBot = true;
+                IsCollision = true;
             else
-                CollisionWithBot = false;
+                IsCollision = false;
+        }
+
+
+        public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform heroTransform)
+        {
+            // Level 1 exit
+            if (texture.Name == "Levels/Level1/65")
+                if (playerRec.Intersects(tileRectangle))
+                {
+                    IsCollisionWithExit = true;
+                    heroTransform.Position = new Vector2(0, 30);
+                }
+
+            // Level 1 water
+            if (texture.Name == "Levels/Level1/263")
+                if (playerRec.Intersects(tileRectangle))
+                    heroTransform.Position = new Vector2(0, 300);
+
+            //Level 2 lava
+            if (texture.Name == "Levels/Level1/262")
+                if (playerRec.Intersects(tileRectangle))
+                    heroTransform.Position = new Vector2(0, 1000);
         }
     }
 }

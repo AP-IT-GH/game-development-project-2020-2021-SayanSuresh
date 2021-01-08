@@ -12,7 +12,7 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Hero : ITransform, ICollision, ICollisionEntity
+    public class Hero : ITransform, ICollisionRectangle, ICollisionEntity
     {
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
@@ -47,7 +47,7 @@ namespace game2020.Players
             this.moveCommand = mvCommand;
 
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 62, 110);
-            Position = new Vector2(30, 30);
+            Position = new Vector2(0, 800);
         }
 
         private void move(Vector2 _direction)
@@ -64,7 +64,7 @@ namespace game2020.Players
             //jumping movement
             if (_direction.Y == -1 && HasJumped == false)
             {
-                Velocity = new Vector2(Velocity.X, -9f);
+                Velocity = new Vector2(Velocity.X, -10f);
                 HasJumped = true;
             }
 

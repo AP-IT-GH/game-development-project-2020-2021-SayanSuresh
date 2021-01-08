@@ -8,14 +8,14 @@ using System.Text;
 
 namespace game2020.Players
 {
-    public class Enemy : ICollision
+    public class Enemy : ICollisionRectangle
     {
+        public bool IsCollision { get; set; }
         public Rectangle CollisionRectangle { get; set; }
 
         private Rectangle _collisionRectangle;
         private Texture2D enemyTexture;
         private Vector2 position;
-        private Vector2 origin;
         private Vector2 velocity;
 
         private bool right;
@@ -23,7 +23,6 @@ namespace game2020.Players
         private float distance;
         private float oldDistance;
         private float playerDistance;
-
 
         public Enemy(Texture2D texture, Vector2 newPosition, float newDistance)
         {
@@ -33,13 +32,12 @@ namespace game2020.Players
 
             oldDistance = distance;
 
-            _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width, enemyTexture.Height);
+            _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width-30, enemyTexture.Height-30);
         }
 
         public void Update(ITransform player)
         {
             position += velocity;
-            origin = new Vector2(enemyTexture.Width / 2, enemyTexture.Height / 2);
 
             if (distance <= 0)
             {
@@ -52,9 +50,9 @@ namespace game2020.Players
                 velocity.X = -1f;
             }
 
-            if (right) 
-                distance += 1; 
-            else 
+            if (right)
+                distance += 1;
+            else
                 distance -= 1;
 
             playerDistance = player.Position.X - position.X;
@@ -77,9 +75,9 @@ namespace game2020.Players
         public void Draw(SpriteBatch spriteBatch)
         {
             if (velocity.X > 0)
-                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, new Vector2(32, 32), 1f, SpriteEffects.FlipHorizontally, 0f);
             else
-                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(enemyTexture, position, null, Color.White, rotation, new Vector2(32, 32), 1f, SpriteEffects.None, 0f);
         }
     }
 }

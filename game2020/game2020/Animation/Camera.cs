@@ -8,6 +8,9 @@ namespace Game1
 {
     class Camera
     {
+        // Voor deze classe heb ik gebruikt gemaakt van youtuber (Oyyou: MonoGame Tutorial 014 - Camera Following Sprite) zijn   uitleg
+        // zodat mijn hero gevolgd wordt
+
         private Matrix transform;
         public Matrix Transform
         {
