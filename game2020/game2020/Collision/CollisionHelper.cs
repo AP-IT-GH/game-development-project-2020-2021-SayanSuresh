@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RefactoringCol
 {
-    public class CollisionHelper: ICollisionHelper
+    public abstract class CollisionHelper
     {
         // Voor deze stukje berekeningen van collision heb ik afgeleid
         // uit een tutorial van een youtuber (Oyyou: MonoGame Tutorial 009 - Sprite Collision Detection and Response 7:00 min)

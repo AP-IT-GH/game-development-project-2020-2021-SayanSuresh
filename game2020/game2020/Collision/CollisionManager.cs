@@ -11,31 +11,27 @@ using System.Text;
 
 namespace game2020.Collision
 {
-    class CollisionManager : ICollisionWith
+    class CollisionManager : CollisionHelper, ICollisionWith
     {
         public bool IsCollision { get; set; }
         public bool IsCollisionWithExit { get; set; }
-        public CollisionManager() { }
-        public CollisionManager(ICollisionHelper helper) { this.collisionhelper = helper; }
-
-        private ICollisionHelper collisionhelper;
 
         public void UpdateCollision(Rectangle playerRec, Rectangle tileRectangle, int xOffset, int yOffset, ICollisionEntity transform)
         {
-            if (collisionhelper.CollisionBottom(playerRec, tileRectangle))
+            if (CollisionBottom(playerRec, tileRectangle))
             {
                 playerRec.Y = tileRectangle.Y - playerRec.Height;
                 transform.Velocity = new Vector2(transform.Velocity.X, 0f);
                 transform.HasJumped = false;
             }
 
-            if (collisionhelper.CollisionRight(playerRec, tileRectangle))
+            if (CollisionRight(playerRec, tileRectangle))
                 transform.Position = new Vector2(tileRectangle.X - playerRec.Width - 2, transform.Position.Y);
 
-            if (collisionhelper.CollisionLeft(playerRec, tileRectangle))
+            if (CollisionLeft(playerRec, tileRectangle))
                 transform.Position = new Vector2(tileRectangle.X + playerRec.Width + 2, transform.Position.Y);
 
-            if (collisionhelper.CollisionTop(playerRec, tileRectangle))
+            if (CollisionTop(playerRec, tileRectangle))
                 transform.Velocity = new Vector2(transform.Velocity.X, 7f);
 
 
@@ -61,26 +57,22 @@ namespace game2020.Collision
                 IsCollision = false;
         }
 
-
-        public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform heroTransform)
+        public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform heroTransform, List<IInteractTile> interactTiles)
         {
-            // Level 1 exit
-            if (texture.Name == "Levels/Level1/65")
-                if (playerRec.Intersects(tileRectangle))
+            if (interactTiles != null)
+            {
+                foreach (var interactTile in interactTiles)
                 {
-                    IsCollisionWithExit = true;
-                    heroTransform.Position = new Vector2(0, 30);
+                    if (texture.Name == interactTile.Name)
+                        if (playerRec.Intersects(tileRectangle))
+                        {
+                            if (interactTile.IsExit)
+                                IsCollisionWithExit = true;
+                            heroTransform.Position = interactTile.Pos;
+                        }
                 }
-
-            // Level 1 water
-            if (texture.Name == "Levels/Level1/263")
-                if (playerRec.Intersects(tileRectangle))
-                    heroTransform.Position = new Vector2(0, 300);
-
-            //Level 2 lava
-            if (texture.Name == "Levels/Level1/262")
-                if (playerRec.Intersects(tileRectangle))
-                    heroTransform.Position = new Vector2(0, 1000);
+            }
         }
     }
 }
+

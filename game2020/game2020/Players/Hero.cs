@@ -14,10 +14,10 @@ namespace game2020.Players
 {
     public class Hero : ITransform, ICollisionRectangle, ICollisionEntity
     {
-        public Vector2 Position { get; set; }
-        public Rectangle CollisionRectangle { get; set; }
         public bool HasJumped { get; set; }
+        public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
+        public Rectangle CollisionRectangle { get; set; }
 
         private Rectangle _collisionRectangle;
         private Texture2D heroTexture;

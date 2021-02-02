@@ -24,21 +24,21 @@ namespace game2020
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        // Menu
+        // Game menu
         private bool gameStarted = false;
         private int count = 0;
         private Texture2D deadTextTexture;
         private Rectangle deadTextRectangle;
         private Button btnPlay, btnQuit;
 
+        // Game screen and camera folowing 
         private IScreenUpdater screenUpdater;
-        private IGameCommand gameCommand;
-
         private Camera camera;
 
         private CollisionManager collisionManager;
         private CollisionWithEnemy collisionWithEnemy;
 
+        // Levels
         private Level level;
         private Level1 lv1;
         private Level2 lv2;
@@ -65,9 +65,7 @@ namespace game2020
             btnPlay = new Button();
             btnQuit = new Button();
 
-            gameCommand = new MoveCommand();
-
-            collisionManager = new CollisionManager(new CollisionHelper());
+            collisionManager = new CollisionManager();
             collisionWithEnemy = new CollisionWithEnemy();
             collisionWithEnemy.IsCollision = true;
 
@@ -81,7 +79,6 @@ namespace game2020
             // TODO: use this.Content to load your game content here
 
             // Load level
-            //Tile.Content = Content;
             lv1 = new Level1(Content);
             lv2 = new Level2(Content);
             level = lv1;
@@ -102,7 +99,7 @@ namespace game2020
 
         private void initialzeGameObjects()
         {
-            hero = new Hero(textureHero, new KeyBoardReader(), gameCommand);
+            hero = new Hero(textureHero, new KeyBoardReader(), new MoveCommand());
             hero.HeroWalkAnimation(new WalkRightAnimation(textureHero, hero), new WalkLeftAnimation(textureHero, hero),
                                    new WalkUpAnimation(textureHero, hero), new WalkDownAnimation(textureHero, hero));
         }
@@ -159,7 +156,7 @@ namespace game2020
                 camera.Update(hero.Position, level.Width, level.Height);
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, level.Width, level.Height, hero);
 
-                collisionManager.LevelCollision(hero.CollisionRectangle, tile.Rectangle, tile.texture, hero);
+                collisionManager.LevelCollision(hero.CollisionRectangle, tile.Rectangle, tile.texture, hero, level.InteractWithTiles);
             }
 
             if (level.Enemies != null)
