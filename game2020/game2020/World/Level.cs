@@ -42,7 +42,6 @@ namespace game2020.World
             //this.CurrentMap = map;
             //this.Size = size;
 
-
             for (int x = 0; x < map.GetLength(1); x++)
             {
                 for (int y = 0; y < map.GetLength(0); y++)
