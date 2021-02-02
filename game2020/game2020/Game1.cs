@@ -103,7 +103,6 @@ namespace game2020
             hero.HeroWalkAnimation(new WalkRightAnimation(textureHero, hero), new WalkLeftAnimation(textureHero, hero),
                                    new WalkUpAnimation(textureHero, hero), new WalkDownAnimation(textureHero, hero));
         }
-
         private void intro(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
@@ -132,6 +131,13 @@ namespace game2020
                 btnQuit.Update(mouse);
             }
         }
+        private void checkInteract()
+        {
+            if (collisionManager.IsCollisionWithExit)
+                level = lv2;
+            if (collisionManager.IsCollisionWithChest)
+                gameStarted = true;
+        }
 
         protected override void Update(GameTime gameTime)
         {
@@ -143,8 +149,8 @@ namespace game2020
             // Intro menu
             intro(gameTime);
 
-            if (collisionManager.IsCollisionWithExit)
-                level = lv2;
+            // Checking if hero intertact with specific tile
+            checkInteract();
 
             // Scrolling backgrounds
             foreach (Scrolling scrolling in level.ScrollingLayer)
@@ -179,8 +185,9 @@ namespace game2020
             _spriteBatch.Begin();
             if (gameStarted)
             {
-                if (count > 1)
-                    _spriteBatch.Draw(deadTextTexture, deadTextRectangle, Color.AliceBlue);
+                if (!collisionManager.IsCollisionWithChest)
+                    if (count > 1)
+                        _spriteBatch.Draw(deadTextTexture, deadTextRectangle, Color.AliceBlue);
 
                 btnPlay.Draw(_spriteBatch);
                 btnQuit.Draw(_spriteBatch);
