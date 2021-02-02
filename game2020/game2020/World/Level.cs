@@ -19,7 +19,7 @@ namespace game2020.World
         public int Size { get; set; }
         public int Width { get { return width; } }
         public int Height { get { return height; } }
-        public List<Enemy> Enemies { get; set; }
+        public List<ICollisionRectangle> Enemies { get; set; }
         public List<Background> Layers { get; set; }
         public List<Background> ScrollingLayer { get; set; }
         public List<IInteractTile> InteractWithTiles { get; set; }

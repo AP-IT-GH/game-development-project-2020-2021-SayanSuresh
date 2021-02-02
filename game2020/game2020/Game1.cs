@@ -133,7 +133,7 @@ namespace game2020
         }
         private void checkInteract()
         {
-            if (!collisionManager.IsCollisionWithExit)
+            if (collisionManager.IsCollisionWithExit)
                 level = lv2;
             if (collisionManager.IsCollisionWithChest) { 
                 gameStarted = true;

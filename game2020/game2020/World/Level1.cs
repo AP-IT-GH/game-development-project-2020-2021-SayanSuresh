@@ -19,7 +19,7 @@ namespace Game1
             path = "Levels/Level1/";
             Layers = new List<Background>();
             ScrollingLayer = new List<Background>();
-            Enemies = new List<Enemy>();
+            Enemies = new List<ICollisionRectangle>();
             InteractWithTiles = new List<IInteractTile>();
 
             GenerateLevel(new int[,]
