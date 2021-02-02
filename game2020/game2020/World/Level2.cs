@@ -12,11 +12,6 @@ namespace game2020.World
 {
     public class Level2 : Level
     {
-        //public override List<Background> Layers { get; set; }
-        //public override List<Background> ScrollingLayer { get; set; }
-        //public override List<Enemy> Enemies { get; set; }
-        //public override List<IInteractTile> InteractWithTiles { get; set; }
-
         public Level2(ContentManager content) : base(content)
         {
             path = "Levels/Level1/";

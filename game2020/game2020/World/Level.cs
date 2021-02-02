@@ -22,7 +22,7 @@ namespace game2020.World
         public virtual List<Enemy> Enemies { get; set; }
         public virtual List<Background> Layers { get; set; }
         public virtual List<Background> ScrollingLayer { get; set; }
-        public virtual List<IInteractTile> InteractWithTiles { get; set; }
+        public List<IInteractTile> InteractWithTiles { get; set; }
         public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
 
         protected int width, height;

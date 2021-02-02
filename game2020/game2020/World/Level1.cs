@@ -14,11 +14,6 @@ namespace Game1
 {
     class Level1 : Level
     {
-        //public override List<Background> Layers { get; set; }
-        //public override List<Background> ScrollingLayer { get; set; }
-        //public override List<Enemy> Enemies { get; set; }
-        //public override List<IInteractTile> InteractWithTiles { get; set; }
-
         public Level1(ContentManager content) : base(content)
         {
             path = "Levels/Level1/";
