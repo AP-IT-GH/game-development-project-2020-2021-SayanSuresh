@@ -10,14 +10,16 @@ namespace game2020.World
     public class InteractTile : IInteractTile
     {
         public bool IsExit { get; set; }
+        public bool IsWon { get; set; }
         public string Name { get; set; }
         public Vector2 Pos { get; set; }
       
-        public InteractTile(Vector2 position, string textureName, bool exit = false)
+        public InteractTile(Vector2 position, string textureName, bool exit = false, bool win = false)
         {
             this.Pos = position;
             this.Name = textureName;
             this.IsExit = exit;
+            this.IsWon = win;
         }
     }
 }

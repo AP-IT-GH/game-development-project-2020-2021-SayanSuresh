@@ -9,6 +9,7 @@ namespace game2020.Interfaces
     public interface IInteractTile
     {
         public bool IsExit { get; set; }
+        public bool IsWon { get; set; }
         public string Name { get; set; }
         public Vector2 Pos { get; set; }
     }

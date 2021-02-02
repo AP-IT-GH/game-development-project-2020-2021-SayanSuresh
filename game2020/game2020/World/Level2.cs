@@ -12,10 +12,10 @@ namespace game2020.World
 {
     public class Level2 : Level
     {
-        protected override string path { get; set; }
-        public override List<Background> Layers { get; set; }
-        public override List<Background> ScrollingLayer { get; set; }
-        public override List<Enemy> Enemies { get; set; }
+        //public override List<Background> Layers { get; set; }
+        //public override List<Background> ScrollingLayer { get; set; }
+        //public override List<Enemy> Enemies { get; set; }
+        //public override List<IInteractTile> InteractWithTiles { get; set; }
 
         public Level2(ContentManager content) : base(content)
         {
@@ -59,11 +59,8 @@ namespace game2020.World
             addEnemies();
             addInteract();
         }
-        protected override void addInteract()
-        {
-            this.InteractWithTiles.Add(new InteractTile(new Vector2(0, 30), "Levels/Level1/262"));
-        }
-        protected override void addLayers()
+       
+        protected void addLayers()
         {
             Layers.Add(new Layer(content.Load<Texture2D>("Backgrounds/Level2/Background"), new Rectangle(0, 0, 5120, 2230)));
             Layers.Add(new Layer(content.Load<Texture2D>("Backgrounds/Level1/layer_05_1920 x 1080"), new Rectangle(0, 0, 5120, 2230)));
@@ -71,14 +68,19 @@ namespace game2020.World
             Layers.Add(new Layer(content.Load<Texture2D>("Backgrounds/Level1/layer_03_1920 x 1080"), new Rectangle(0, 0, 5120, 2290)));
             Layers.Add(new Layer(content.Load<Texture2D>("Backgrounds/Level1/layer_01_1920 x 1080"), new Rectangle(0, 0, 5120, 1730)));
         }
-        protected override void addScrollingLayers()
+        protected void addScrollingLayers()
         {
             ScrollingLayer.Add(new Scrolling(content.Load<Texture2D>("Backgrounds/Level1/layer_06_1920 x 1080"), new Rectangle(0, 0, 5120, 1800)));
         }
-        protected override void addEnemies()
+        protected void addEnemies()
         {
             Enemies.Add(new Enemy(content.Load<Texture2D>("Levels/Level1/52"), new Vector2(1200, 95), 150));
             Enemies.Add(new Enemy(content.Load<Texture2D>("Levels/Level1/52"), new Vector2(600, 610), 150));
+        }
+        protected void addInteract()
+        {
+            this.InteractWithTiles.Add(new InteractTile(new Vector2(0, 30), "Levels/Level1/262"));
+            this.InteractWithTiles.Add(new InteractTile(new Vector2(0, 30), "Levels/Level1/264", true));
         }
     }
 }

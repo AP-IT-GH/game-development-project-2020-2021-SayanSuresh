@@ -15,6 +15,7 @@ namespace game2020.Collision
     {
         public bool IsCollision { get; set; }
         public bool IsCollisionWithExit { get; set; }
+        public bool IsCollisionWithChest { get; set; }
 
         public void UpdateCollision(Rectangle playerRec, Rectangle tileRectangle, int xOffset, int yOffset, ICollisionEntity transform)
         {
@@ -57,7 +58,7 @@ namespace game2020.Collision
                 IsCollision = false;
         }
 
-        public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform heroTransform, List<IInteractTile> interactTiles)
+        public void LevelCollision(Rectangle playerRec, Rectangle tileRectangle, Texture2D texture, ITransform transform, List<IInteractTile> interactTiles)
         {
             if (interactTiles != null)
             {
@@ -68,7 +69,9 @@ namespace game2020.Collision
                         {
                             if (interactTile.IsExit)
                                 IsCollisionWithExit = true;
-                            heroTransform.Position = interactTile.Pos;
+                            if (interactTile.IsWon)
+                                IsCollisionWithChest = true;
+                            transform.Position = interactTile.Pos;
                         }
                 }
             }

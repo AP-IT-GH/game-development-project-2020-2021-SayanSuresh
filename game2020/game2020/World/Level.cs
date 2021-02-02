@@ -13,31 +13,31 @@ namespace game2020.World
 {
     public abstract class Level
     {
+        private List<CollisionTiles> collisionTiles;
+
         public int[,] CurrentMap { get; set; }
         public int Size { get; set; }
         public int Width { get { return width; } }
         public int Height { get { return height; } }
-        public abstract List<Enemy> Enemies { get; set; }
-        public abstract List<Background> Layers { get; set; }
-        public abstract List<Background> ScrollingLayer { get; set; }
-        public List<IInteractTile> InteractWithTiles { get; set; }
-        public Level(ContentManager Content) { this.content = Content; }
+        public virtual List<Enemy> Enemies { get; set; }
+        public virtual List<Background> Layers { get; set; }
+        public virtual List<Background> ScrollingLayer { get; set; }
+        public virtual List<IInteractTile> InteractWithTiles { get; set; }
         public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
 
         protected int width, height;
         protected ContentManager content;
-        protected abstract string path { get; set; }
-        protected virtual void addLayers() { }
-        protected virtual void addScrollingLayers() { }
-        protected virtual void addEnemies() { }
-        protected virtual void addInteract() { }
+        protected string path { get; set; }
+        protected void addLayers() { }
+        protected void addScrollingLayers() { }
+        protected void addEnemies() { }
+        protected void addInteract() { }
 
-        private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
-
-        //public Level()
-        //{
-        //    InteractWithTiles = new List<IInteractTile>();
-        //}
+        public Level(ContentManager Content)
+        {
+            this.content = Content;
+            collisionTiles = new List<CollisionTiles>();
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
