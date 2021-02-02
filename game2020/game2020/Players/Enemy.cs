@@ -28,9 +28,9 @@ namespace game2020.Players
         {
             enemyTexture = texture;
             position = newPosition;
-            distance = newDistance;
 
-            oldDistance = distance;
+            oldDistance = newDistance;
+            distance = newDistance;
 
             _collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, enemyTexture.Width-30, enemyTexture.Height-30);
         }

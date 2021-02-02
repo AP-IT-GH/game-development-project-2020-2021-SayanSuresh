@@ -15,5 +15,7 @@ namespace game2020.World
             texture = content.Load<Texture2D>(path + i);
             this.Rectangle = newRectangle;
         }
+
+        public CollisionTiles() { }
     }
 }

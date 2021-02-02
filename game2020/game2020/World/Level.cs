@@ -1,4 +1,5 @@
-﻿using game2020.Backgrounds;
+﻿using Game1;
+using game2020.Backgrounds;
 using game2020.Interfaces;
 using game2020.Players;
 using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@ namespace game2020.World
 {
     public abstract class Level
     {
-        private List<CollisionTiles> collisionTiles;
+        private List<Tile> collisionTiles;
 
         public int[,] CurrentMap { get; set; }
         public int Size { get; set; }
@@ -23,7 +24,7 @@ namespace game2020.World
         public List<Background> Layers { get; set; }
         public List<Background> ScrollingLayer { get; set; }
         public List<IInteractTile> InteractWithTiles { get; set; }
-        public List<CollisionTiles> CollisionTiles { get { return collisionTiles; } }
+        public List<Tile> CollisionTiles { get { return collisionTiles; } }
 
         protected int width, height;
         protected ContentManager content;
@@ -36,7 +37,7 @@ namespace game2020.World
         public Level(ContentManager Content)
         {
             this.content = Content;
-            collisionTiles = new List<CollisionTiles>();
+            collisionTiles = new List<Tile>();
         }
 
         public void Draw(SpriteBatch spriteBatch)

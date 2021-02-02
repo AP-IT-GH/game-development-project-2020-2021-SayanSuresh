@@ -58,7 +58,7 @@ namespace game2020
             // TODO: Add your initialization logic here
 
             // Option for resizing screen
-            screenUpdater = new ScreenUpdate();
+            //screenUpdater = new ScreenUpdate();
             // screenUpdater.UpdateScreen(_graphics, 1280, 720);
 
             // Menu buttons
@@ -67,7 +67,7 @@ namespace game2020
 
             collisionManager = new CollisionManager();
             collisionWithEnemy = new CollisionWithEnemy();
-            collisionWithEnemy.IsCollision = true;
+            collisionWithEnemy.IsInteracting = true;
 
             base.Initialize();
         }
@@ -108,11 +108,11 @@ namespace game2020
             MouseState mouse = Mouse.GetState();
             if (!gameStarted)
             {
-                if (collisionWithEnemy.IsCollision)
+                if (collisionWithEnemy.IsInteracting)
                 {
                     btnPlay.isClicked = false;
                     gameStarted = true;
-                    collisionWithEnemy.IsCollision = false;
+                    collisionWithEnemy.IsInteracting = false;
                 }
 
                 // Player and background update
@@ -161,7 +161,9 @@ namespace game2020
            
             foreach (CollisionTiles tile in level.CollisionTiles)
             {
+                // Camera follow hero
                 camera.Update(hero.Position, level.Width, level.Height);
+
                 collisionManager.UpdateCollision(hero.CollisionRectangle, tile.Rectangle, level.Width, level.Height, hero);
 
                 collisionManager.LevelCollision(hero.CollisionRectangle, tile.Rectangle, tile.texture, hero, level.InteractWithTiles);

@@ -9,14 +9,14 @@ namespace game2020.Collision
 {
     public class CollisionWithEnemy 
     {
-        public bool IsCollision { get; set; }
+        public bool IsInteracting { get; set; }
 
-        public void Handle(ICollisionWith collision, ITransform heroTransform)
+        public void Handle(ICollisionWith collision, ITransform transform)
         {
             if (collision.IsCollision)
             {
-                IsCollision = true;
-                heroTransform.Position = new Vector2(0, 30);
+                IsInteracting = true;
+                transform.Position = new Vector2(0, 30);
             }
         }
     }

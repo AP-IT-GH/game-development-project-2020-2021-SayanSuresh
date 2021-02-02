@@ -22,15 +22,5 @@ namespace Game1
         {
             spriteBatch.Draw(texture, Rectangle, Color.White);
         }
-
-        //protected ContentManager content { get; set; }
-        //public Tile(ContentManager content) { this.content = content; }
-
-        //private  static ContentManager content;
-        //public static ContentManager Content
-        //{
-        //    protected get { return content; }
-        //    set { content = value; }
-        //}
     }
 }

@@ -17,7 +17,7 @@ namespace Game1
             get { return transform; }
         }
 
-        private Vector2 centre;
+        private Vector2 center;
         private Viewport viewport;
 
         public Camera(Viewport newViewport)
@@ -28,19 +28,19 @@ namespace Game1
         public void Update(Vector2 position, int xOffcet, int yOffcet)
         {
             if (position.X < viewport.Width / 2)
-                centre.X = viewport.Width / 2;
+                center.X = viewport.Width / 2;
             else if (position.X > xOffcet - (viewport.Width / 2))
-                centre.X = xOffcet - (viewport.Width / 2);
-            else centre.X = position.X;
+                center.X = xOffcet - (viewport.Width / 2);
+            else center.X = position.X;
 
             if (position.Y < viewport.Height / 2)
-                centre.Y = viewport.Height / 2;
+                center.Y = viewport.Height / 2;
             else if (position.Y > yOffcet - (viewport.Height / 2))
-                centre.Y = yOffcet - (viewport.Height / 2);
-            else centre.Y = position.Y;
+                center.Y = yOffcet - (viewport.Height / 2);
+            else center.Y = position.Y;
 
-            transform = Matrix.CreateTranslation(new Vector3(-centre.X + (viewport.Width / 2), 
-                                                             -centre.Y + (viewport.Height / 2), 0));
+            transform = Matrix.CreateTranslation(new Vector3(-center.X + (viewport.Width / 2), 
+                                                             -center.Y + (viewport.Height / 2), 0));
         }
     }
 }
