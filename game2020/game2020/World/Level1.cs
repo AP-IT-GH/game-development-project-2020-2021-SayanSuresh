@@ -74,7 +74,7 @@ namespace Game1
         }
         protected void addEnemies()
         {
-            Enemies.Add(new Enemy(content.Load<Texture2D>("Levels/Level1/52"), new Vector2(1200, 95), 150));
+            Enemies.Add(new Enemy(content.Load<Texture2D>("Levels/Level1/52"), new Vector2(1200, 130), 150));
             Enemies.Add(new Enemy(content.Load<Texture2D>("Levels/Level1/52"), new Vector2(900, 610), 150));
         }
         protected void addInteract()

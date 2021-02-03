@@ -120,6 +120,8 @@ namespace game2020
                 foreach (Scrolling scrolling in level.ScrollingLayer)
                     scrolling.Update();
             }
+
+            // Check for mennu button state
             else if (gameStarted)
             {
                 if (btnPlay.isClicked)
